@@ -23,10 +23,6 @@ class _WorkoutSessionLogState extends State<WorkoutSessionLog> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Nuova sessione',
-        child: Icon(Icons.add),
-      ),
     );
   }
 }
@@ -55,7 +51,7 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
                       'A',
                       style: TextStyle(
                         fontSize: 40,
-                        color: Colors.redAccent,
+                        color: Theme.of(context).accentColor,
                       ),
                     ),
                   ),
