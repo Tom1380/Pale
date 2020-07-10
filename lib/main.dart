@@ -61,7 +61,7 @@ class _PageState extends State<Page> {
             icon: Icon(
               Icons.filter_none,
             ),
-            title: Text('Nuova sessione'),
+            title: Text('Scheda'),
           ),
         ],
         backgroundColor: Theme.of(context).primaryColor,
