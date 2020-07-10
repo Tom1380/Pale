@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class WorkoutSessionLog extends StatefulWidget {
-  WorkoutSessionLog({Key key, this.title}) : super(key: key);
-  final String title;
+  WorkoutSessionLog({Key key}) : super(key: key);
   @override
   _WorkoutSessionLogState createState() => _WorkoutSessionLogState();
 }
@@ -12,7 +11,7 @@ class _WorkoutSessionLogState extends State<WorkoutSessionLog> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Sessioni passate'),
       ),
       body: Center(
         child: Container(

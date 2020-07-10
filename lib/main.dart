@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(),
       ),
-      home: WorkoutSessionLog(title: 'Sessioni'),
+      home: WorkoutSessionLog(),
     );
   }
 }
