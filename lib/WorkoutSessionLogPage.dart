@@ -38,7 +38,6 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Card(
-        elevation: 7,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -67,11 +66,14 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        WorkoutSessionPreviewHighlightsText('Highlights'),
+                        WorkoutSessionPreviewHighlightsText(
+                          'Highlights',
+                          italic: true,
+                        ),
                         WorkoutSessionPreviewHighlightsText('Bench 80kg x 3'),
                         WorkoutSessionPreviewHighlightsText('Squat 105kg x 5'),
                         WorkoutSessionPreviewHighlightsText(
-                          'Trap Bar DL 130x5',
+                          'Trap Bar DL 130kg x 5',
                         ),
                       ],
                     ),
@@ -98,7 +100,9 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
 
 class WorkoutSessionPreviewHighlightsText extends StatelessWidget {
   String _string;
-  WorkoutSessionPreviewHighlightsText(this._string);
+  bool italic;
+  WorkoutSessionPreviewHighlightsText(this._string, {bool italic})
+      : italic = italic ?? false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -109,6 +113,7 @@ class WorkoutSessionPreviewHighlightsText extends StatelessWidget {
         this._string,
         style: TextStyle(
           color: Colors.blueGrey[600],
+          fontStyle: italic ? FontStyle.italic : FontStyle.normal,
         ),
       ),
     );

@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.redAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(),
+        cardTheme: CardTheme(
+          elevation: 7,
+        ),
       ),
       home: Page(),
     );
@@ -25,8 +28,6 @@ class MyApp extends StatelessWidget {
 }
 
 class Page extends StatefulWidget {
-  int _index = 0;
-
   final List<Widget> _pages = <Widget>[
     WorkoutSessionLog(
       key: PageStorageKey('Page1'),
@@ -43,10 +44,12 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> {
+  int _index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget._pages[widget._index],
+      body: widget._pages[_index],
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -65,10 +68,10 @@ class _PageState extends State<Page> {
           ),
         ],
         backgroundColor: Theme.of(context).primaryColor,
-        currentIndex: widget._index,
+        currentIndex: _index,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
-        onTap: (int index) => setState(() => widget._index = index),
+        onTap: (int index) => setState(() => _index = index),
       ),
     );
   }
