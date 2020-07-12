@@ -55,6 +55,9 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.only(
+                      left: 16,
+                    ),
                     decoration: BoxDecoration(
                       border: Border(
                         left: BorderSide(
@@ -105,16 +108,11 @@ class WorkoutSessionPreviewHighlightsText extends StatelessWidget {
       : italic = italic ?? false;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 8,
-      ),
-      child: Text(
-        this._string,
-        style: TextStyle(
-          color: Colors.blueGrey[600],
-          fontStyle: italic ? FontStyle.italic : FontStyle.normal,
-        ),
+    return Text(
+      this._string,
+      style: TextStyle(
+        color: Colors.blueGrey[600],
+        fontStyle: italic ? FontStyle.italic : FontStyle.normal,
       ),
     );
   }
