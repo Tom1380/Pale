@@ -13,7 +13,7 @@ class _WorkoutProgramConfigurationState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scheda'),
+        title: Text('La mia scheda'),
       ),
       body: ListView.builder(
         itemCount: 20,
