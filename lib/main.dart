@@ -15,12 +15,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.red,
-        accentColor: Colors.redAccent,
+        accentColor: Colors.red[600],
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(),
+        appBarTheme: AppBarTheme(color: Colors.red[900]),
         cardTheme: CardTheme(
           elevation: 7,
         ),
+        bottomNavigationBarTheme:
+            BottomNavigationBarThemeData(backgroundColor: Colors.red[900]),
       ),
       home: Page(),
     );
@@ -67,7 +69,6 @@ class _PageState extends State<Page> {
             title: Text('Scheda'),
           ),
         ],
-        backgroundColor: Theme.of(context).primaryColor,
         currentIndex: _index,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
