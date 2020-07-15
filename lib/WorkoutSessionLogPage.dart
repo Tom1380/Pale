@@ -51,6 +51,7 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
                       style: TextStyle(
                         fontSize: 40,
                         color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),

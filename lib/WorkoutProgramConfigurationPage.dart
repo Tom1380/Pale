@@ -53,6 +53,7 @@ class _WorkoutProgramDayConfiguratorState
                       style: TextStyle(
                         fontSize: 40,
                         color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -70,7 +71,9 @@ class _WorkoutProgramDayConfiguratorState
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text('Segnaposto')],
+                      children: [
+                        Text('Segnaposto'),
+                      ],
                     ),
                   )
                 ],
