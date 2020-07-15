@@ -75,15 +75,6 @@ class _WorkoutProgramDayConfiguratorState
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Ieri - 07/07/20 10:47',
-                  style: TextStyle(
-                    color: Colors.blueGrey[600],
-                  ),
-                ),
-              )
             ],
             crossAxisAlignment: CrossAxisAlignment.start,
           ),
