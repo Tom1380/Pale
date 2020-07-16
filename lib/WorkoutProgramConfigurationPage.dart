@@ -182,6 +182,29 @@ class _WorkoutProgramDayConfiguratorState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Giorno A')),
+      body: Column(
+        children: [
+          Card(
+            child: Row(
+              children: [
+                Text('Hey'),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
+  }
+}
+
+class SetPerRepsConfigurator extends StatefulWidget {
+  @override
+  _SetPerRepsConfiguratorState createState() => _SetPerRepsConfiguratorState();
+}
+
+class _SetPerRepsConfiguratorState extends State<SetPerRepsConfigurator> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
