@@ -182,29 +182,116 @@ class _WorkoutProgramDayConfiguratorState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Giorno A')),
-      body: Column(
-        children: [
-          Card(
-            child: Row(
-              children: [
-                Text('Hey'),
-              ],
-            ),
-          ),
-        ],
+      body: ListView.builder(
+        itemCount: 8,
+        itemBuilder: (BuildContext context, int index) {
+          return SetsPerRepsConfigurator('Panca Piana');
+        },
       ),
     );
   }
 }
 
-class SetPerRepsConfigurator extends StatefulWidget {
+class SetsPerRepsConfigurator extends StatefulWidget {
+  String name;
+  int sets;
+  List<int> reps = [];
+  bool constantReps = true;
+  SetsPerRepsConfigurator(this.name);
   @override
-  _SetPerRepsConfiguratorState createState() => _SetPerRepsConfiguratorState();
+  _SetsPerRepsConfiguratorState createState() =>
+      _SetsPerRepsConfiguratorState();
 }
 
-class _SetPerRepsConfiguratorState extends State<SetPerRepsConfigurator> {
+class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
+  Widget setsTextField() {
+    return Container(
+      width: 100,
+      child: TextFormField(
+        initialValue: '${widget.sets ?? ''}',
+        decoration: new InputDecoration(labelText: "Sets"),
+        keyboardType: TextInputType.number,
+        onChanged: (input) {
+          setState(() {
+            widget.sets = int.parse(input);
+          });
+        },
+      ),
+    );
+  }
+
+  Widget repsTextField() {
+    return Container(
+      width: 100,
+      child: TextField(
+        decoration: new InputDecoration(labelText: "Reps"),
+        keyboardType: TextInputType.number,
+      ),
+    );
+  }
+
+  Widget constantSetsVariantSubWidgets() {
+    return Row(
+      children: [
+        setsTextField(),
+        Padding(
+          padding: EdgeInsets.all(8),
+        ),
+        repsTextField(),
+      ],
+    );
+  }
+
+  Widget nonConstantSetsVariantSubWidgets() {
+    List<Widget> widgets = [
+      setsTextField(),
+      Padding(
+        padding: EdgeInsets.all(8),
+      ),
+    ];
+    for (int i = 0; i < (widget.sets ?? 1); ++i) {
+      widgets.add(repsTextField());
+    }
+    return Column(
+      children: widgets,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return GestureDetector(
+      child: Card(
+        margin: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Text(
+                  widget.name,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                widget.constantReps
+                    ? constantSetsVariantSubWidgets()
+                    : nonConstantSetsVariantSubWidgets(),
+              ],
+            ),
+          ],
+        ),
+      ),
+      onDoubleTap: () {
+        if (!widget.constantReps) {
+          for (int i = 0; i < widget.reps.length; ++i) {
+            widget.reps[i] = widget.reps[0];
+          }
+        }
+        setState(() {
+          widget.constantReps = !widget.constantReps;
+        });
+      },
+    );
   }
 }
