@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'ExercisesPage.dart';
 import 'WorkoutProgramConfigurationPage.dart';
 import 'WorkoutSessionLogPage.dart';
 
@@ -39,7 +40,10 @@ class Page extends StatefulWidget {
     ),
     WorkoutProgramConfiguration(
       key: PageStorageKey('Page2'),
-    )
+    ),
+    ExercisesPage(
+      key: PageStorageKey('Page3'),
+    ),
   ];
 
   final PageStorageBucket _bucket = PageStorageBucket();
@@ -70,6 +74,12 @@ class _PageState extends State<Page> {
               Icons.filter_none,
             ),
             title: Text('Scheda'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.directions_run,
+            ),
+            title: Text('Esercizi'),
           ),
         ],
         currentIndex: _index,
