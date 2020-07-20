@@ -165,6 +165,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
                   ).toMap(),
                   conflictAlgorithm: ConflictAlgorithm.fail,
                 );
+                Navigator.pop(context);
               },
               label: Text('Registra esercizio'),
             ),
