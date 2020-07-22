@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Pale',
       theme: ThemeData(
         primarySwatch: Colors.red,
         accentColor: Colors.red[600],
@@ -25,8 +25,9 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        bottomNavigationBarTheme:
-            BottomNavigationBarThemeData(backgroundColor: Colors.red[900]),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.red[900],
+        ),
       ),
       home: Page(),
     );
