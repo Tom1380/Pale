@@ -42,7 +42,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
       columns: ['id', 'name', 'type'],
       //where: 'name = \'Panca piana\'',
       where: 'name LIKE ?',
-      whereArgs: ['$search%'],
+      whereArgs: ['%$search%'],
       limit: 30,
     );
     return List.generate(maps.length, (i) {
