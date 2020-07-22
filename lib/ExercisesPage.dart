@@ -40,7 +40,6 @@ class _ExercisesPageState extends State<ExercisesPage> {
     List<Map<String, dynamic>> maps = await db.query(
       'exercises',
       columns: ['id', 'name', 'type'],
-      //where: 'name = \'Panca piana\'',
       where: 'name LIKE ?',
       whereArgs: ['%$search%'],
       limit: 30,
