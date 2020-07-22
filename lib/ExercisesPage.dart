@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ExercisesPage extends StatefulWidget {
-  final Future<Database> future_db = getDatabasesPath().then((String path) {
+  final Future<Database> futureDB = getDatabasesPath().then((String path) {
     return openDatabase(
       join(
         path,
@@ -36,7 +36,7 @@ class ExercisesPage extends StatefulWidget {
 
 class _ExercisesPageState extends State<ExercisesPage> {
   Future<List<Exercise>> search(String search) async {
-    final Database db = await widget.future_db;
+    final Database db = await widget.futureDB;
     List<Map<String, dynamic>> maps = await db.query(
       'exercises',
       columns: ['id', 'name', 'type'],
@@ -107,7 +107,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => NewExercisePage(widget.future_db),
+            builder: (context) => NewExercisePage(widget.futureDB),
           ),
         ),
       ),
@@ -132,8 +132,8 @@ class Exercise {
 }
 
 class NewExercisePage extends StatefulWidget {
-  Future<Database> future_db;
-  NewExercisePage(this.future_db);
+  Future<Database> futureDB;
+  NewExercisePage(this.futureDB);
   @override
   _NewExercisePageState createState() => _NewExercisePageState();
 }
@@ -162,7 +162,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
             ),
             FloatingActionButton.extended(
               onPressed: () async {
-                final Database db = await widget.future_db;
+                final Database db = await widget.futureDB;
                 await db.insert(
                   'exercises',
                   Exercise(
