@@ -87,6 +87,14 @@ class _ExercisesPageState extends State<ExercisesPage> {
               ),
             );
           },
+          emptyWidget: Center(
+            child: Text(
+              'Inizia a digitare per cercare un esercizio.',
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
+              ),
+            ),
+          ),
           searchBarStyle: SearchBarStyle(
             borderRadius: BorderRadius.circular(10),
           ),
