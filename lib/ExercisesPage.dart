@@ -62,21 +62,13 @@ class _ExercisesPageState extends State<ExercisesPage> {
         title: Text('Esercizi'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: SearchBar(
           minimumChars: 0,
           onSearch: search,
           onItemFound: (Exercise exercise, int index) {
-            return InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      width: 1,
-                      color: Colors.grey[300],
-                    ),
-                  ),
-                ),
+            return GestureDetector(
+              child: Card(
                 child: ListTile(
                   title: Text(exercise.name),
                   subtitle: Text(
