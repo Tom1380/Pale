@@ -30,7 +30,6 @@ class ExercisesPage extends StatefulWidget {
   });
 
   ExercisesPage({Key key}) : super(key: key);
-  SearchBarController controller;
   @override
   _ExercisesPageState createState() => _ExercisesPageState();
 }
@@ -67,22 +66,30 @@ class _ExercisesPageState extends State<ExercisesPage> {
           minimumChars: 0,
           onSearch: search,
           onItemFound: (Exercise exercise, int index) {
-            return Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    width: 1,
-                    color: Colors.grey[300],
+            return InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 1,
+                      color: Colors.grey[300],
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  title: Text(exercise.name),
+                  subtitle: Text(
+                    exercise.type,
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                    ),
                   ),
                 ),
               ),
-              child: ListTile(
-                title: Text(exercise.name),
-                subtitle: Text(
-                  exercise.type,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                  ),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ExercisePage(exercise.name),
                 ),
               ),
             );
@@ -90,21 +97,18 @@ class _ExercisesPageState extends State<ExercisesPage> {
           searchBarStyle: SearchBarStyle(
             borderRadius: BorderRadius.circular(10),
           ),
-          searchBarController: widget.controller,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add,
         ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NewExercisePage(widget.future_db),
-            ),
-          );
-        },
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewExercisePage(widget.future_db),
+          ),
+        ),
       ),
     );
   }
@@ -183,5 +187,18 @@ class _NewExercisePageState extends State<NewExercisePage> {
     // widget tree.
     myController.dispose();
     super.dispose();
+  }
+}
+
+class ExercisePage extends StatelessWidget {
+  ExercisePage(this.exerciseName);
+  final String exerciseName;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(exerciseName),
+      ),
+    );
   }
 }
