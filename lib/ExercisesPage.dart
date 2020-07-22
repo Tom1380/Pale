@@ -45,7 +45,6 @@ class _ExercisesPageState extends State<ExercisesPage> {
       whereArgs: ['$search%'],
       limit: 30,
     );
-    // .query('SELECT id, name, type FROM exercises WHERE name LIKE \'?%\'');
     return List.generate(maps.length, (i) {
       return Exercise(
         id: maps[i]['id'],
