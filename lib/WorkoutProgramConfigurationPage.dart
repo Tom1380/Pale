@@ -216,6 +216,7 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
             widget.sets = int.parse(input);
           });
         },
+        cursorColor: Theme.of(context).primaryColor,
       ),
     );
   }
@@ -226,6 +227,7 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
       child: TextField(
         decoration: new InputDecoration(labelText: "Reps"),
         keyboardType: TextInputType.number,
+        cursorColor: Theme.of(context).primaryColor,
       ),
     );
   }

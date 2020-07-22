@@ -150,6 +150,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
               decoration: InputDecoration(
                 hintText: 'Nome',
               ),
+              cursorColor: Theme.of(context).primaryColor,
             ),
             Padding(
               padding: EdgeInsets.all(8),
@@ -167,6 +168,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
                 );
                 Navigator.pop(context);
               },
+              icon: Icon(Icons.add),
               label: Text('Registra esercizio'),
             ),
           ],
