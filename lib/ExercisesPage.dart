@@ -43,6 +43,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
       //where: 'name = \'Panca piana\'',
       where: 'name LIKE ?',
       whereArgs: ['$search%'],
+      limit: 30,
     );
     // .query('SELECT id, name, type FROM exercises WHERE name LIKE \'?%\'');
     return List.generate(maps.length, (i) {
