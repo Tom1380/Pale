@@ -75,14 +75,12 @@ class _WorkoutProgramDayPreviewState extends State<WorkoutProgramDayPreview> {
             ),
           ),
         ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WorkoutProgramDayConfigurator(),
-            ),
-          );
-        },
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WorkoutProgramDayConfigurator(),
+          ),
+        ),
       ),
     );
   }
