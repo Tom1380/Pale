@@ -19,15 +19,16 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.red[600],
         visualDensity: VisualDensity.adaptivePlatformDensity,
         appBarTheme: AppBarTheme(color: Colors.red[900]),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.red[900],
+        ),
         cardTheme: CardTheme(
           elevation: 7,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.red[900],
-        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(elevation: 7),
       ),
       home: Page(),
     );
