@@ -186,10 +186,15 @@ class _WorkoutProgramDayConfiguratorState
     // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      child: FloatingActionButton.extended(
-        onPressed: onPressed,
-        icon: Icon(Icons.add),
-        label: Text('Aggiungi esercizio'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: onPressed,
+            icon: Icon(Icons.add),
+            label: Text('Aggiungi esercizio'),
+          ),
+        ],
       ),
     );
   }
