@@ -106,7 +106,7 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
           strings[i],
           overflow: TextOverflow.fade,
           style: TextStyle(
-            fontSize: 8,
+            fontSize: 10,
             color: Colors.blueGrey[600],
           ),
         ),
