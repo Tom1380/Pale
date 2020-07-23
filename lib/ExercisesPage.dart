@@ -5,6 +5,12 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ExercisesPage extends StatefulWidget {
+  // <If you want to remove or edit this comment, remember that a comment in the NewExercisePage widget points to this.>
+  // If this is not null, this is a sub-page.
+  // So we want to execute this closure after choosing an exercise, because this page is serving as an exercise picker.
+  // Creating a new exercise automatically chooses it, hence why we pass it to the NewExercisePage widget.
+  // After an exercise is selected, we go back to this page's parent by popping the Navigator enough times.
+  void Function(String) onChosen;
   final Future<Database> futureDB = getDatabasesPath().then((String path) {
     return openDatabase(
       join(
@@ -29,7 +35,10 @@ class ExercisesPage extends StatefulWidget {
     );
   });
 
-  ExercisesPage({Key key}) : super(key: key);
+  ExercisesPage({
+    Key key,
+    this.onChosen,
+  }) : super(key: key);
   @override
   _ExercisesPageState createState() => _ExercisesPageState();
 }
@@ -77,12 +86,19 @@ class _ExercisesPageState extends State<ExercisesPage> {
                   ),
                 ),
               ),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ExercisePage(exercise.name),
-                ),
-              ),
+              onTap: () {
+                if (widget.onChosen != null) {
+                  widget.onChosen(exercise.name);
+                  Navigator.pop(context);
+                  return;
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ExercisePage(exercise.name),
+                  ),
+                );
+              },
             );
           },
           emptyWidget: Center(
@@ -102,12 +118,17 @@ class _ExercisesPageState extends State<ExercisesPage> {
         child: Icon(
           Icons.add,
         ),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewExercisePage(widget.futureDB),
-          ),
-        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewExercisePage(
+                widget.futureDB,
+                onChosen: widget.onChosen,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -131,7 +152,9 @@ class Exercise {
 
 class NewExercisePage extends StatefulWidget {
   Future<Database> futureDB;
-  NewExercisePage(this.futureDB);
+  // Refer to the comment left on this same variable on the ExercisesPage widget.
+  void Function(String) onChosen;
+  NewExercisePage(this.futureDB, {this.onChosen});
   @override
   _NewExercisePageState createState() => _NewExercisePageState();
 }
@@ -170,6 +193,10 @@ class _NewExercisePageState extends State<NewExercisePage> {
                   conflictAlgorithm: ConflictAlgorithm.fail,
                 );
                 Navigator.pop(context);
+                if (widget.onChosen != null) {
+                  widget.onChosen(myController.text);
+                  Navigator.pop(context);
+                }
               },
               icon: Icon(Icons.add),
               label: Text('Registra esercizio'),

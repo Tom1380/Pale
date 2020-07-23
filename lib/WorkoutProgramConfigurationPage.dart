@@ -182,17 +182,12 @@ class _WorkoutProgramDayConfiguratorState
     extends State<WorkoutProgramDayConfigurator> {
   List<Widget> exercises = [];
 
-  Widget addExerciseButton() {
+  Widget addExerciseButton(void Function() onPressed) {
     // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: FloatingActionButton.extended(
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ExercisesPage(),
-          ),
-        ),
+        onPressed: onPressed,
         icon: Icon(Icons.add),
         label: Text('Aggiungi esercizio'),
       ),
@@ -203,7 +198,24 @@ class _WorkoutProgramDayConfiguratorState
   Widget build(BuildContext context) {
     // TODO Find a better way to clone the exercises list.
     List<Widget> lvChildren = exercises.map((element) => element).toList();
-    lvChildren.add(addExerciseButton());
+    lvChildren.add(
+      addExerciseButton(
+        () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExercisesPage(onChosen: (name) {
+                setState(
+                  () => exercises.add(
+                    SetsPerRepsConfigurator(name),
+                  ),
+                );
+              }),
+            ),
+          );
+        },
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text('Giorno A'),
