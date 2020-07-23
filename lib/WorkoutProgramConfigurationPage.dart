@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ExercisesPage.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
   WorkoutProgramConfiguration({Key key}) : super(key: key);
@@ -178,15 +179,38 @@ class WorkoutProgramDayConfigurator extends StatefulWidget {
 
 class _WorkoutProgramDayConfiguratorState
     extends State<WorkoutProgramDayConfigurator> {
+  List<Widget> exercises = [];
+
+  Widget addExerciseButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: FloatingActionButton.extended(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExercisesPage(),
+          ),
+        ),
+        icon: Icon(Icons.add),
+        label: Text('Aggiungi esercizio'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // TODO Find a better way to clone the exercises list.
+    List<Widget> lvChildren = exercises.map((element) => element).toList();
+    lvChildren.add(addExerciseButton());
     return Scaffold(
-      appBar: AppBar(title: Text('Giorno A')),
-      body: ListView.builder(
-        itemCount: 8,
-        itemBuilder: (BuildContext context, int index) {
-          return SetsPerRepsConfigurator('Panca Piana');
-        },
+      appBar: AppBar(
+        title: Text('Giorno A'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: ListView(
+          children: lvChildren,
+        ),
       ),
     );
   }
