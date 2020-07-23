@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'ExercisesPage.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
@@ -182,6 +183,7 @@ class _WorkoutProgramDayConfiguratorState
   List<Widget> exercises = [];
 
   Widget addExerciseButton() {
+    // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: FloatingActionButton.extended(
