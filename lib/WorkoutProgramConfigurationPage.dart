@@ -23,6 +23,15 @@ class _WorkoutProgramConfigurationState
           return WorkoutProgramDayPreview();
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NewWorkoutDay(),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -335,6 +344,24 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
           widget.constantReps = !widget.constantReps;
         });
       },
+    );
+  }
+}
+
+class NewWorkoutDay extends StatefulWidget {
+  @override
+  _NewWorkoutDayState createState() => _NewWorkoutDayState();
+}
+
+class _NewWorkoutDayState extends State<NewWorkoutDay> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Nuovo giorno',
+        ),
+      ),
     );
   }
 }
