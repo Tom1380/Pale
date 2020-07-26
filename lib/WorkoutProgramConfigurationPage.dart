@@ -191,7 +191,7 @@ class _WorkoutProgramDayConfiguratorState
     extends State<WorkoutProgramDayConfigurator> {
   List<Widget> exercises = [];
 
-  Widget addExerciseButton(void Function() onPressed) {
+  Widget exerciseButton(void Function() onPressed) {
     // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -213,7 +213,7 @@ class _WorkoutProgramDayConfiguratorState
     // TODO Find a better way to clone the exercises list.
     List<Widget> lvChildren = exercises.map((element) => element).toList();
     lvChildren.add(
-      addExerciseButton(
+      exerciseButton(
         () {
           Navigator.push(
             context,
