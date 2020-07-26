@@ -62,7 +62,10 @@ class _PageState extends State<Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget._pages[_index],
+      body: PageStorage(
+        child: widget._pages[_index],
+        bucket: widget._bucket,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
