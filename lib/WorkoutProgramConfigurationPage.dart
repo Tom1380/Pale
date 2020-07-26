@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'ExercisesPage.dart';
+import 'db.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
+  final Future<Database> futureDB = DBConnection();
   WorkoutProgramConfiguration({Key key}) : super(key: key);
   @override
   _WorkoutProgramConfigurationState createState() =>
@@ -254,7 +258,7 @@ class SetsPerRepsConfigurator extends StatefulWidget {
 }
 
 class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
-  Widget setsTextField() {
+  Widget setsTextField(BuildContext context) {
     return Container(
       width: 100,
       child: TextFormField(
@@ -271,7 +275,7 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
     );
   }
 
-  Widget repsTextField() {
+  Widget repsTextField(BuildContext context) {
     return Container(
       width: 100,
       child: TextField(
@@ -282,27 +286,27 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
     );
   }
 
-  Widget constantSetsVariantSubWidgets() {
+  Widget constantSetsVariantSubWidgets(BuildContext context) {
     return Row(
       children: [
-        setsTextField(),
+        setsTextField(context),
         Padding(
           padding: EdgeInsets.all(8),
         ),
-        repsTextField(),
+        repsTextField(context),
       ],
     );
   }
 
-  Widget nonConstantSetsVariantSubWidgets() {
+  Widget nonConstantSetsVariantSubWidgets(BuildContext context) {
     List<Widget> widgets = [
-      setsTextField(),
+      setsTextField(context),
       Padding(
         padding: EdgeInsets.all(8),
       ),
     ];
     for (int i = 0; i < (widget.sets ?? 1); ++i) {
-      widgets.add(repsTextField());
+      widgets.add(repsTextField(context));
     }
     return Column(
       children: widgets,
@@ -327,8 +331,8 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
                   ),
                 ),
                 widget.constantReps
-                    ? constantSetsVariantSubWidgets()
-                    : nonConstantSetsVariantSubWidgets(),
+                    ? constantSetsVariantSubWidgets(context)
+                    : nonConstantSetsVariantSubWidgets(context),
               ],
             ),
           ],

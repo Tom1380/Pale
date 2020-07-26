@@ -1,8 +1,9 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+
+import 'db.dart';
 
 class ExercisesPage extends StatefulWidget {
   // <If you want to remove or edit this comment, remember that a comment in the NewExercisePage widget points to this.>
@@ -11,29 +12,7 @@ class ExercisesPage extends StatefulWidget {
   // Creating a new exercise automatically chooses it, hence why we pass it to the NewExercisePage widget.
   // After an exercise is selected, we go back to this page's parent by popping the Navigator enough times.
   void Function(String) onChosen;
-  final Future<Database> futureDB = getDatabasesPath().then((String path) {
-    return openDatabase(
-      join(
-        path,
-        'exercises',
-      ), // When the database is first created, create a table to store exercises.
-      onCreate: (db, version) {
-        // Run the CREATE TABLE statement on the database.
-        // TODO type shoud not be text, but instead an enum. Possible values should be (I think):
-        // Bodyweight reps
-        // Weighted reps
-        // Bodyweight isometric
-        // Weighted isometric
-        // They all have sets!
-        return db.execute(
-          "CREATE TABLE exercises (id INTEGER PRIMARY KEY, name TEXT UNIQUE, type TEXT)",
-        );
-      },
-      // Set the version. This executes the onCreate function and provides a
-      // path to perform database upgrades and downgrades.
-      version: 1,
-    );
-  });
+  final Future<Database> futureDB = DBConnection();
 
   ExercisesPage({
     Key key,
