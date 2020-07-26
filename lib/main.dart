@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: Colors.red[900]),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.red[900],
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white70,
         ),
         cardTheme: CardTheme(
           elevation: 7,
@@ -85,8 +87,6 @@ class _PageState extends State<Page> {
           ),
         ],
         currentIndex: _index,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
         onTap: (int index) => setState(() => _index = index),
       ),
     );
