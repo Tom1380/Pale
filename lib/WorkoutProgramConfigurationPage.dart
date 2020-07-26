@@ -40,7 +40,6 @@ class _WorkoutProgramConfigurationState
 }
 
 class WorkoutProgramDayPreview extends StatefulWidget {
-  TextEditingController controller = new TextEditingController();
   @override
   _WorkoutProgramDayPreviewState createState() =>
       _WorkoutProgramDayPreviewState();
