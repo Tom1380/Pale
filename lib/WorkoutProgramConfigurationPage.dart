@@ -213,6 +213,7 @@ class _WorkoutProgramDayConfiguratorState
     // TODO Find a better way to clone the exercises list.
     List<Widget> lvChildren = exercises.map((element) => element).toList();
     lvChildren.add(
+      // TODO fix with https://flutter.dev/docs/cookbook/navigation/returning-data
       exerciseButton(
         () {
           Navigator.push(
