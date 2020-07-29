@@ -6,17 +6,12 @@ import 'package:sqflite/sqflite.dart';
 import 'db.dart';
 
 class ExercisesPage extends StatefulWidget {
-  // <If you want to remove or edit this comment, remember that a comment in the NewExercisePage widget points to this.>
-  // If this is not null, this is a sub-page.
-  // So we want to execute this closure after choosing an exercise, because this page is serving as an exercise picker.
-  // Creating a new exercise automatically chooses it, hence why we pass it to the NewExercisePage widget.
-  // After an exercise is selected, we go back to this page's parent by popping the Navigator enough times.
-  void Function(String) onChosen;
   final Future<Database> futureDB = DBConnection();
-
+  // Is this used as an exercise picker?
+  final bool isPicker;
   ExercisesPage({
     Key key,
-    this.onChosen,
+    @required this.isPicker,
   }) : super(key: key);
   @override
   _ExercisesPageState createState() => _ExercisesPageState();
@@ -66,9 +61,8 @@ class _ExercisesPageState extends State<ExercisesPage> {
                 ),
               ),
               onTap: () {
-                if (widget.onChosen != null) {
-                  widget.onChosen(exercise.name);
-                  Navigator.pop(context);
+                if (widget.isPicker) {
+                  Navigator.pop(context, exercise.name);
                   return;
                 }
                 Navigator.push(
@@ -103,7 +97,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
             MaterialPageRoute(
               builder: (context) => NewExercisePage(
                 widget.futureDB,
-                onChosen: widget.onChosen,
+                isPicker: widget.isPicker,
               ),
             ),
           );
@@ -131,9 +125,11 @@ class Exercise {
 
 class NewExercisePage extends StatefulWidget {
   Future<Database> futureDB;
-  // Refer to the comment left on this same variable on the ExercisesPage widget.
-  void Function(String) onChosen;
-  NewExercisePage(this.futureDB, {this.onChosen});
+  final bool isPicker;
+  NewExercisePage(
+    this.futureDB, {
+    @required this.isPicker,
+  });
   @override
   _NewExercisePageState createState() => _NewExercisePageState();
 }
@@ -172,9 +168,8 @@ class _NewExercisePageState extends State<NewExercisePage> {
                   conflictAlgorithm: ConflictAlgorithm.fail,
                 );
                 Navigator.pop(context);
-                if (widget.onChosen != null) {
-                  widget.onChosen(myController.text);
-                  Navigator.pop(context);
+                if (widget.isPicker) {
+                  Navigator.pop(context, myController.text);
                 }
               },
               icon: Icon(Icons.add),

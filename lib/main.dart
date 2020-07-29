@@ -47,6 +47,7 @@ class Page extends StatefulWidget {
     ),
     ExercisesPage(
       key: PageStorageKey('Page3'),
+      isPicker: false,
     ),
   ];
 

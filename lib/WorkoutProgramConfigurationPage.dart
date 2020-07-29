@@ -191,7 +191,7 @@ class _WorkoutProgramDayConfiguratorState
     extends State<WorkoutProgramDayConfigurator> {
   List<Widget> exercises = [];
 
-  Widget exerciseButton(void Function() onPressed) {
+  Widget exerciseButton() {
     // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -199,7 +199,21 @@ class _WorkoutProgramDayConfiguratorState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton.extended(
-            onPressed: onPressed,
+            onPressed: () async {
+              String exerciseName = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ExercisesPage(isPicker: true),
+                ),
+              );
+              if (exerciseName != null) {
+                setState(
+                  () => exercises.add(
+                    SetsPerRepsConfigurator(exerciseName),
+                  ),
+                );
+              }
+            },
             icon: Icon(Icons.add),
             label: Text('Aggiungi esercizio'),
           ),
@@ -213,23 +227,7 @@ class _WorkoutProgramDayConfiguratorState
     // TODO Find a better way to clone the exercises list.
     List<Widget> lvChildren = exercises.map((element) => element).toList();
     lvChildren.add(
-      // TODO fix with https://flutter.dev/docs/cookbook/navigation/returning-data
-      exerciseButton(
-        () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ExercisesPage(onChosen: (name) {
-                setState(
-                  () => exercises.add(
-                    SetsPerRepsConfigurator(name),
-                  ),
-                );
-              }),
-            ),
-          );
-        },
-      ),
+      exerciseButton(),
     );
     return Scaffold(
       appBar: AppBar(
