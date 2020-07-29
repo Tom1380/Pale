@@ -192,7 +192,6 @@ class _WorkoutProgramDayConfiguratorState
   List<Widget> exercises = [];
 
   Widget exerciseButton() {
-    // TODO figure out a way to not have it stretched out in the list view.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
