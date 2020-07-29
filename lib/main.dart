@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ExercisesPage.dart';
+import 'ExercisesPage/ExercisesPage.dart';
 import 'WorkoutProgramConfigurationPage.dart';
 import 'WorkoutSessionLogPage.dart';
 

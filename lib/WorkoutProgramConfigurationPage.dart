@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-import 'ExercisesPage.dart';
+import 'ExercisesPage/ExercisesPage.dart';
 import 'db.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
