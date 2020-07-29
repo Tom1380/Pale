@@ -223,8 +223,7 @@ class _WorkoutProgramDayConfiguratorState
 
   @override
   Widget build(BuildContext context) {
-    // TODO Find a better way to clone the exercises list.
-    List<Widget> lvChildren = exercises.map((element) => element).toList();
+    List<Widget> lvChildren = new List.from(exercises);
     lvChildren.add(
       exerciseButton(),
     );
