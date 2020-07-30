@@ -54,7 +54,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
                 child: ListTile(
                   title: Text(exercise.name),
                   subtitle: Text(
-                    exercise.type,
+                    exercise.type == 0 ? "A ripetizioni" : "Isometrico",
                     style: TextStyle(
                       color: Theme.of(context).accentColor,
                     ),
@@ -111,7 +111,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
 class Exercise {
   final int id;
   final String name;
-  final String type;
+  final int type;
 
   Exercise({this.id, this.name, this.type});
 

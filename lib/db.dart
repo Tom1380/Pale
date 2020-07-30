@@ -9,14 +9,8 @@ Future<Database> DBConnection() async {
         'pale',
       ),
       onCreate: (db, version) async {
-        // TODO type shoud not be text, but instead an enum. Possible values should be (I think):
-        // Bodyweight reps
-        // Weighted reps
-        // Bodyweight isometric
-        // Weighted isometric
-        // They all have sets!
         await db.execute(
-          "CREATE TABLE exercises (id INTEGER PRIMARY KEY, name TEXT UNIQUE, type TEXT)",
+          "CREATE TABLE exercises (id INTEGER PRIMARY KEY, name TEXT UNIQUE, type INTEGER)",
         );
         await db.execute(
           "CREATE TABLE workout_program_days (id INTEGER PRIMARY KEY, name TEXT UNIQUE)",

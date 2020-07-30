@@ -6,6 +6,7 @@ import 'ExercisesPage.dart';
 class NewExercisePage extends StatefulWidget {
   final Future<Database> futureDB;
   final bool isPicker;
+  int repsOrIsometricChoice;
   NewExercisePage(
     this.futureDB, {
     @required this.isPicker,
@@ -18,6 +19,65 @@ class _NewExercisePageState extends State<NewExercisePage> {
   final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    List<Widget> columnChildren = [
+      TextField(
+        controller: myController,
+        onChanged: (text) => setState(() {}),
+        decoration: InputDecoration(
+          hintText: 'Nome',
+        ),
+        cursorColor: Theme.of(context).primaryColor,
+      ),
+      Padding(
+        padding: EdgeInsets.all(8),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RepsOrIsometricButtons(
+            'Reps',
+            selected: widget.repsOrIsometricChoice == 0,
+            onPressed: () => setState(() => widget.repsOrIsometricChoice = 0),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+          ),
+          RepsOrIsometricButtons(
+            'Isometrico',
+            selected: widget.repsOrIsometricChoice == 1,
+            onPressed: () => setState(() => widget.repsOrIsometricChoice = 1),
+          ),
+        ],
+      ),
+      Padding(
+        padding: EdgeInsets.all(8),
+      ),
+    ];
+
+    if (myController.text != "" && widget.repsOrIsometricChoice != null) {
+      columnChildren.add(
+        FloatingActionButton.extended(
+          onPressed: () async {
+            final Database db = await widget.futureDB;
+            await db.insert(
+              'exercises',
+              Exercise(
+                name: myController.text,
+                type: widget.repsOrIsometricChoice,
+              ).toMap(),
+              conflictAlgorithm: ConflictAlgorithm.fail,
+            );
+            Navigator.pop(context);
+            if (widget.isPicker) {
+              Navigator.pop(context, myController.text);
+            }
+          },
+          icon: Icon(Icons.add),
+          label: Text('Registra esercizio'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Nuovo esercizio'),
@@ -25,37 +85,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
       body: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
-          children: [
-            TextField(
-              controller: myController,
-              decoration: InputDecoration(
-                hintText: 'Nome',
-              ),
-              cursorColor: Theme.of(context).primaryColor,
-            ),
-            Padding(
-              padding: EdgeInsets.all(8),
-            ),
-            FloatingActionButton.extended(
-              onPressed: () async {
-                final Database db = await widget.futureDB;
-                await db.insert(
-                  'exercises',
-                  Exercise(
-                    name: myController.text,
-                    type: 'Ripetizioni con peso',
-                  ).toMap(),
-                  conflictAlgorithm: ConflictAlgorithm.fail,
-                );
-                Navigator.pop(context);
-                if (widget.isPicker) {
-                  Navigator.pop(context, myController.text);
-                }
-              },
-              icon: Icon(Icons.add),
-              label: Text('Registra esercizio'),
-            ),
-          ],
+          children: columnChildren,
         ),
       ),
     );
@@ -67,5 +97,40 @@ class _NewExercisePageState extends State<NewExercisePage> {
     // widget tree.
     myController.dispose();
     super.dispose();
+  }
+}
+
+class RepsOrIsometricButtons extends StatefulWidget {
+  String string;
+  bool selected;
+  void Function() onPressed;
+  RepsOrIsometricButtons(
+    this.string, {
+    @required this.selected,
+    @required this.onPressed,
+  });
+  @override
+  _RepsOrIsometricButtonsState createState() => _RepsOrIsometricButtonsState();
+}
+
+class _RepsOrIsometricButtonsState extends State<RepsOrIsometricButtons> {
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      splashColor: Theme.of(context).accentColor,
+      color: Colors.white,
+      disabledColor: Theme.of(context).accentColor,
+      child: Text(
+        widget.string,
+        style: TextStyle(
+          color: widget.selected ? Colors.white : Theme.of(context).accentColor,
+        ),
+      ),
+      onPressed: widget.selected ? null : () => widget.onPressed(),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0.0),
+        side: BorderSide(color: Colors.red),
+      ),
+    );
   }
 }
