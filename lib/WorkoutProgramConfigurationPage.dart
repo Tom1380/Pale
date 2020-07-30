@@ -323,6 +323,12 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
                   widget.exercise.name,
                   style: TextStyle(
                     fontSize: 20,
+                  ),
+                ),
+                Text(
+                  'A ripetizioni',
+                  style: TextStyle(
+                    fontSize: 15,
                     color: Theme.of(context).accentColor,
                   ),
                 ),
