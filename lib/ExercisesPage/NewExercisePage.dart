@@ -59,7 +59,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
         FloatingActionButton.extended(
           onPressed: () async {
             final Database db = await widget.futureDB;
-            await db.insert(
+            int id = await db.insert(
               'exercises',
               Exercise(
                 name: myController.text,
@@ -69,7 +69,14 @@ class _NewExercisePageState extends State<NewExercisePage> {
             );
             Navigator.pop(context);
             if (widget.isPicker) {
-              Navigator.pop(context, myController.text);
+              Navigator.pop(
+                context,
+                Exercise(
+                  id: id,
+                  name: myController.text,
+                  type: widget.repsOrIsometricChoice,
+                ),
+              );
             }
           },
           icon: Icon(Icons.add),

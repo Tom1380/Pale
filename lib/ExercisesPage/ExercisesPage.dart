@@ -63,7 +63,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
               ),
               onTap: () {
                 if (widget.isPicker) {
-                  Navigator.pop(context, exercise.name);
+                  Navigator.pop(context, exercise);
                   return;
                 }
                 Navigator.push(

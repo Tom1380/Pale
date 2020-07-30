@@ -199,18 +199,17 @@ class _WorkoutProgramDayConfiguratorState
         children: [
           FloatingActionButton.extended(
             onPressed: () async {
-              // TODO return an 'Exercise' instance instead of only its name as a string, so we can get its type (reps or isometric).
-              String exerciseName = await Navigator.push(
+              Exercise exercise = await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ExercisesPage(isPicker: true),
                 ),
               );
-              if (exerciseName != null) {
+              if (exercise != null) {
                 // TODO act accordingly to the exercise type (reps or isometric) instead of assuming reps.
                 setState(
                   () => exercises.add(
-                    SetsPerRepsConfigurator(exerciseName),
+                    SetsPerRepsConfigurator(exercise),
                   ),
                 );
               }
@@ -244,11 +243,11 @@ class _WorkoutProgramDayConfiguratorState
 }
 
 class SetsPerRepsConfigurator extends StatefulWidget {
-  String name;
+  Exercise exercise;
   int sets;
   List<int> reps = [];
   bool constantReps = true;
-  SetsPerRepsConfigurator(this.name);
+  SetsPerRepsConfigurator(this.exercise);
   @override
   _SetsPerRepsConfiguratorState createState() =>
       _SetsPerRepsConfiguratorState();
@@ -321,7 +320,7 @@ class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
             Column(
               children: [
                 Text(
-                  widget.name,
+                  widget.exercise.name,
                   style: TextStyle(
                     fontSize: 20,
                     color: Theme.of(context).accentColor,
