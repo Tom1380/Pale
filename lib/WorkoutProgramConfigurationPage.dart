@@ -209,7 +209,7 @@ class _WorkoutProgramDayConfiguratorState
                 // TODO act accordingly to the exercise type (reps or isometric) instead of assuming reps.
                 setState(
                   () => exercises.add(
-                    SetsPerRepsConfigurator(exercise),
+                    RepsConfigurator(exercise),
                   ),
                 );
               }
@@ -242,18 +242,17 @@ class _WorkoutProgramDayConfiguratorState
   }
 }
 
-class SetsPerRepsConfigurator extends StatefulWidget {
+class RepsConfigurator extends StatefulWidget {
   Exercise exercise;
   int sets;
   List<int> reps = [];
   bool constantReps = true;
-  SetsPerRepsConfigurator(this.exercise);
+  RepsConfigurator(this.exercise);
   @override
-  _SetsPerRepsConfiguratorState createState() =>
-      _SetsPerRepsConfiguratorState();
+  _RepsConfiguratorState createState() => _RepsConfiguratorState();
 }
 
-class _SetsPerRepsConfiguratorState extends State<SetsPerRepsConfigurator> {
+class _RepsConfiguratorState extends State<RepsConfigurator> {
   Widget setsTextField(BuildContext context) {
     return Container(
       width: 100,
