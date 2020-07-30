@@ -206,10 +206,11 @@ class _WorkoutProgramDayConfiguratorState
                 ),
               );
               if (exercise != null) {
-                // TODO act accordingly to the exercise type (reps or isometric) instead of assuming reps.
                 setState(
                   () => exercises.add(
-                    RepsConfigurator(exercise),
+                    exercise.type == 0
+                        ? RepsConfigurator(exercise)
+                        : IsometricConfigurator(exercise),
                   ),
                 );
               }
@@ -308,6 +309,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
     );
   }
 
+  // TODO finish building this.
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -349,6 +351,24 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
           widget.constantReps = !widget.constantReps;
         });
       },
+    );
+  }
+}
+
+class IsometricConfigurator extends StatefulWidget {
+  Exercise exercise;
+  IsometricConfigurator(this.exercise);
+  @override
+  _IsometricConfiguratorState createState() => _IsometricConfiguratorState();
+}
+
+class _IsometricConfiguratorState extends State<IsometricConfigurator> {
+  // TODO build this.
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+      child: Text('TODO'),
     );
   }
 }
