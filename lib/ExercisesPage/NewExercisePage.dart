@@ -35,7 +35,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RepsOrIsometricButtons(
-            'Reps',
+            'A ripetizioni',
             selected: widget.repsOrIsometricChoice == 0,
             onPressed: () => setState(() => widget.repsOrIsometricChoice = 0),
           ),
