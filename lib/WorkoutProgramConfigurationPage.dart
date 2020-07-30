@@ -199,6 +199,7 @@ class _WorkoutProgramDayConfiguratorState
         children: [
           FloatingActionButton.extended(
             onPressed: () async {
+              // TODO return an 'Exercise' instance instead of only its name as a string, so we can get its type (reps or isometric).
               String exerciseName = await Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -206,6 +207,7 @@ class _WorkoutProgramDayConfiguratorState
                 ),
               );
               if (exerciseName != null) {
+                // TODO act accordingly to the exercise type (reps or isometric) instead of assuming reps.
                 setState(
                   () => exercises.add(
                     SetsPerRepsConfigurator(exerciseName),
