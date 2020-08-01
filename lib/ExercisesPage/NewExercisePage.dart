@@ -136,7 +136,7 @@ class _RepsOrIsometricButtonsState extends State<RepsOrIsometricButtons> {
       onPressed: widget.selected ? null : () => widget.onPressed(),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0.0),
-        side: BorderSide(color: Colors.red),
+        side: BorderSide(color: Theme.of(context).accentColor),
       ),
     );
   }
