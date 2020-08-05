@@ -246,7 +246,7 @@ class _WorkoutProgramDayConfiguratorState
 class RepsConfigurator extends StatefulWidget {
   Exercise exercise;
   int sets;
-  List<int> reps = [];
+  List<int> reps = [null];
   bool constantReps = true;
   RepsConfigurator(this.exercise);
   @override
@@ -263,20 +263,44 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         keyboardType: TextInputType.number,
         onChanged: (input) {
           setState(() {
-            widget.sets = int.parse(input);
+            int value = int.parse(input);
+            widget.sets = value > 0 ? value : 1;
           });
+          if (widget.constantReps && widget.reps.length != widget.sets) {
+            if (widget.reps.length < widget.sets) {
+              for (int i = widget.reps.length; i < widget.sets; ++i) {
+                widget.reps.add(widget.reps[0]);
+              }
+            } else {
+              widget.reps.removeRange(widget.sets, widget.reps.length);
+            }
+          }
         },
         cursorColor: Theme.of(context).primaryColor,
       ),
     );
   }
 
-  Widget repsTextField(BuildContext context) {
+  Widget repsTextField(BuildContext context, int index) {
     return Container(
       width: 100,
-      child: TextField(
+      child: TextFormField(
+        initialValue:
+            '${widget.reps[index >= widget.reps.length ? widget.reps.length - 1 : index] ?? ''}',
         decoration: new InputDecoration(labelText: "Reps"),
         keyboardType: TextInputType.number,
+        onChanged: (input) {
+          setState(() {
+            int value = int.parse(input);
+            if (widget.constantReps) {
+              for (int i = 0; i < widget.reps.length; ++i) {
+                widget.reps[i] = value;
+              }
+            } else {
+              widget.reps[index] = value;
+            }
+          });
+        },
         cursorColor: Theme.of(context).primaryColor,
       ),
     );
@@ -289,7 +313,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         Padding(
           padding: EdgeInsets.all(8),
         ),
-        repsTextField(context),
+        repsTextField(context, 0),
       ],
     );
   }
@@ -302,14 +326,13 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
       ),
     ];
     for (int i = 0; i < (widget.sets ?? 1); ++i) {
-      widgets.add(repsTextField(context));
+      widgets.add(repsTextField(context, i));
     }
     return Column(
       children: widgets,
     );
   }
 
-  // TODO finish building this.
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -346,6 +369,8 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
           for (int i = 0; i < widget.reps.length; ++i) {
             widget.reps[i] = widget.reps[0];
           }
+        } else {
+          widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
         }
         setState(() {
           widget.constantReps = !widget.constantReps;
