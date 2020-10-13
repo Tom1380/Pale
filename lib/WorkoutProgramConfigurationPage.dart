@@ -5,7 +5,7 @@ import 'ExercisesPage/ExercisesPage.dart';
 import 'db.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
-  final Future<Database> futureDB = DBConnection();
+  final Future<Database> futureDB = dbConnection();
   WorkoutProgramConfiguration({Key key}) : super(key: key);
   @override
   _WorkoutProgramConfigurationState createState() =>

@@ -6,7 +6,6 @@ import 'ExercisesPage.dart';
 class NewExercisePage extends StatefulWidget {
   final Future<Database> futureDB;
   final bool isPicker;
-  int repsOrIsometricChoice;
   NewExercisePage(
     this.futureDB, {
     @required this.isPicker,
@@ -16,6 +15,7 @@ class NewExercisePage extends StatefulWidget {
 }
 
 class _NewExercisePageState extends State<NewExercisePage> {
+  int repsOrIsometricChoice;
   final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -36,16 +36,16 @@ class _NewExercisePageState extends State<NewExercisePage> {
         children: [
           RepsOrIsometricButtons(
             'A ripetizioni',
-            selected: widget.repsOrIsometricChoice == 0,
-            onPressed: () => setState(() => widget.repsOrIsometricChoice = 0),
+            selected: repsOrIsometricChoice == 0,
+            onPressed: () => setState(() => repsOrIsometricChoice = 0),
           ),
           Padding(
             padding: EdgeInsets.all(8),
           ),
           RepsOrIsometricButtons(
             'Isometrico',
-            selected: widget.repsOrIsometricChoice == 1,
-            onPressed: () => setState(() => widget.repsOrIsometricChoice = 1),
+            selected: repsOrIsometricChoice == 1,
+            onPressed: () => setState(() => repsOrIsometricChoice = 1),
           ),
         ],
       ),
@@ -54,7 +54,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
       ),
     ];
 
-    if (myController.text != "" && widget.repsOrIsometricChoice != null) {
+    if (myController.text != "" && repsOrIsometricChoice != null) {
       columnChildren.add(
         FloatingActionButton.extended(
           onPressed: () async {
@@ -63,7 +63,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
               'exercises',
               Exercise(
                 name: myController.text,
-                type: widget.repsOrIsometricChoice,
+                type: repsOrIsometricChoice,
               ).toMap(),
               conflictAlgorithm: ConflictAlgorithm.fail,
             );
@@ -74,7 +74,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
                 Exercise(
                   id: id,
                   name: myController.text,
-                  type: widget.repsOrIsometricChoice,
+                  type: repsOrIsometricChoice,
                 ),
               );
             }
@@ -108,9 +108,9 @@ class _NewExercisePageState extends State<NewExercisePage> {
 }
 
 class RepsOrIsometricButtons extends StatefulWidget {
-  String string;
-  bool selected;
   void Function() onPressed;
+  final String string;
+  final bool selected;
   RepsOrIsometricButtons(
     this.string, {
     @required this.selected,

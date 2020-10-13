@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-Future<Database> DBConnection() async {
+Future<Database> dbConnection() async {
   return getDatabasesPath().then((String path) {
     return openDatabase(
       join(

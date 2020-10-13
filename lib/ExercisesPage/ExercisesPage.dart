@@ -7,7 +7,7 @@ import '../db.dart';
 import 'NewExercisePage.dart';
 
 class ExercisesPage extends StatefulWidget {
-  final Future<Database> futureDB = DBConnection();
+  final Future<Database> futureDB = dbConnection();
   // Is this used as an exercise picker?
   final bool isPicker;
   ExercisesPage({
