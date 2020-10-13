@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'CustomWidgets.dart';
+
 class WorkoutSessionLog extends StatefulWidget {
   WorkoutSessionLog({Key key}) : super(key: key);
   @override
@@ -10,8 +12,8 @@ class _WorkoutSessionLogState extends State<WorkoutSessionLog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sessioni passate'),
+      appBar: CustomAppBar(
+        title: 'Sessioni passate',
       ),
       body: Center(
         child: Container(

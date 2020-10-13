@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'CustomWidgets.dart';
 import 'ExercisesPage/ExercisesPage.dart';
 import 'WorkoutProgramConfigurationPage.dart';
 import 'WorkoutSessionLogPage.dart';
@@ -67,9 +68,7 @@ class _PageState extends State<Page> {
         child: widget._pages[_index],
         bucket: widget._bucket,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+      bottomNavigationBar: CustomBottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(

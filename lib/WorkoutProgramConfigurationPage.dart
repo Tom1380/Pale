@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'CustomWidgets.dart';
 import 'ExercisesPage/ExercisesPage.dart';
 import 'db.dart';
 
@@ -17,8 +18,8 @@ class _WorkoutProgramConfigurationState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('La mia scheda'),
+      appBar: CustomAppBar(
+        title: 'La mia scheda',
       ),
       body: ListView.builder(
         itemCount: 3,
@@ -230,8 +231,8 @@ class _WorkoutProgramDayConfiguratorState
       exerciseButton(),
     );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Giorno A'),
+      appBar: CustomAppBar(
+        title: 'Giorno A',
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -403,10 +404,8 @@ class _NewWorkoutDayState extends State<NewWorkoutDay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Nuovo giorno',
-        ),
+      appBar: CustomAppBar(
+        title: 'Nuovo giorno',
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../CustomWidgets.dart';
 import 'ExercisesPage.dart';
 
 class NewExercisePage extends StatefulWidget {
@@ -86,8 +87,8 @@ class _NewExercisePageState extends State<NewExercisePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Nuovo esercizio'),
+      appBar: CustomAppBar(
+        title: 'Nuovo esercizio',
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),

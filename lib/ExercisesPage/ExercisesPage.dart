@@ -3,6 +3,7 @@ import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../CustomWidgets.dart';
 import '../db.dart';
 import 'NewExercisePage.dart';
 
@@ -40,8 +41,8 @@ class _ExercisesPageState extends State<ExercisesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Esercizi'),
+      appBar: CustomAppBar(
+        title: 'Esercizi',
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -130,8 +131,8 @@ class ExercisePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(exerciseName),
+      appBar: CustomAppBar(
+        title: exerciseName,
       ),
     );
   }
