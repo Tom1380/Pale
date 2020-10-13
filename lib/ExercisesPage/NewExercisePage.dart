@@ -107,7 +107,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
   }
 }
 
-class RepsOrIsometricButtons extends StatefulWidget {
+class RepsOrIsometricButtons extends StatelessWidget {
   final void Function() onPressed;
   final String string;
   final bool selected;
@@ -116,24 +116,19 @@ class RepsOrIsometricButtons extends StatefulWidget {
     @required this.selected,
     @required this.onPressed,
   });
-  @override
-  _RepsOrIsometricButtonsState createState() => _RepsOrIsometricButtonsState();
-}
 
-class _RepsOrIsometricButtonsState extends State<RepsOrIsometricButtons> {
-  @override
   Widget build(BuildContext context) {
     return RaisedButton(
       splashColor: Theme.of(context).accentColor,
       color: Colors.white,
       disabledColor: Theme.of(context).accentColor,
       child: Text(
-        widget.string,
+        string,
         style: TextStyle(
-          color: widget.selected ? Colors.white : Theme.of(context).accentColor,
+          color: selected ? Colors.white : Theme.of(context).accentColor,
         ),
       ),
-      onPressed: widget.selected ? null : () => widget.onPressed(),
+      onPressed: selected ? null : () => onPressed(),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0.0),
         side: BorderSide(color: Theme.of(context).accentColor),
