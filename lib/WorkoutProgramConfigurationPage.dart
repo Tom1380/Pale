@@ -266,14 +266,8 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
             int value = int.parse(input);
             widget.sets = value > 0 ? value : 1;
           });
-          if (widget.constantReps && widget.reps.length != widget.sets) {
-            if (widget.reps.length < widget.sets) {
-              for (int i = widget.reps.length; i < widget.sets; ++i) {
-                widget.reps.add(widget.reps[0]);
-              }
-            } else {
-              widget.reps.removeRange(widget.sets, widget.reps.length);
-            }
+          if (widget.reps.length != widget.sets) {
+            widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
           }
         },
         cursorColor: Theme.of(context).primaryColor,
@@ -335,6 +329,8 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
 
   @override
   Widget build(BuildContext context) {
+    print('sets: ${widget.sets} reps: ${widget.reps}');
+
     return GestureDetector(
       child: Card(
         margin: EdgeInsets.all(10),
@@ -365,13 +361,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         ),
       ),
       onDoubleTap: () {
-        if (!widget.constantReps) {
-          for (int i = 0; i < widget.reps.length; ++i) {
-            widget.reps[i] = widget.reps[0];
-          }
-        } else {
-          widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
-        }
+        widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
         setState(() {
           widget.constantReps = !widget.constantReps;
         });
