@@ -75,19 +75,19 @@ class _PageState extends State<Page> {
             icon: Icon(
               Icons.history,
             ),
-            title: Text('Sessioni Passate'),
+            label: 'Sessioni Passate',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.filter_none,
             ),
-            title: Text('Scheda'),
+            label: 'Scheda',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.directions_run,
             ),
-            title: Text('Esercizi'),
+            label: 'Esercizi',
           ),
         ],
         currentIndex: _index,

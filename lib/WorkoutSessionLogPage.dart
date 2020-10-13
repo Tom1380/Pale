@@ -103,8 +103,8 @@ class _WorkoutSessionPreviewState extends State<WorkoutSessionPreview> {
 }
 
 class WorkoutSessionPreviewHighlightsText extends StatelessWidget {
-  String _string;
-  bool italic;
+  final String _string;
+  final bool italic;
   WorkoutSessionPreviewHighlightsText(this._string, {bool italic})
       : italic = italic ?? false;
   @override

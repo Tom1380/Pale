@@ -108,7 +108,7 @@ class _NewExercisePageState extends State<NewExercisePage> {
 }
 
 class RepsOrIsometricButtons extends StatefulWidget {
-  void Function() onPressed;
+  final void Function() onPressed;
   final String string;
   final bool selected;
   RepsOrIsometricButtons(

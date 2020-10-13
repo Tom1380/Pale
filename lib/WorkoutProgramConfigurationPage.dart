@@ -244,21 +244,21 @@ class _WorkoutProgramDayConfiguratorState
 }
 
 class RepsConfigurator extends StatefulWidget {
-  Exercise exercise;
-  int sets;
-  List<int> reps = [null];
-  bool constantReps = true;
+  final Exercise exercise;
   RepsConfigurator(this.exercise);
   @override
   _RepsConfiguratorState createState() => _RepsConfiguratorState();
 }
 
 class _RepsConfiguratorState extends State<RepsConfigurator> {
+  int sets;
+  List<int> reps = [null];
+  bool constantReps = true;
   Widget setsTextField(BuildContext context) {
     return Container(
       width: 100,
       child: TextFormField(
-        initialValue: '${widget.sets ?? ''}',
+        initialValue: '${sets ?? ''}',
         decoration: new InputDecoration(labelText: "Sets"),
         keyboardType: TextInputType.number,
         onChanged: (input) {
@@ -267,10 +267,10 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
             return;
           }
           setState(() {
-            widget.sets = value;
+            sets = value;
           });
-          if (widget.reps.length != widget.sets) {
-            widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
+          if (reps.length != sets) {
+            reps = List.filled(sets ?? 1, reps[0]);
           }
         },
         cursorColor: Theme.of(context).primaryColor,
@@ -283,7 +283,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
       width: 100,
       child: TextFormField(
         initialValue:
-            '${widget.reps[index >= widget.reps.length ? widget.reps.length - 1 : index] ?? ''}',
+            '${reps[index >= reps.length ? reps.length - 1 : index] ?? ''}',
         decoration: new InputDecoration(labelText: "Reps"),
         keyboardType: TextInputType.number,
         onChanged: (input) {
@@ -292,12 +292,12 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
             if (value < 1) {
               return;
             }
-            if (widget.constantReps) {
-              for (int i = 0; i < widget.reps.length; ++i) {
-                widget.reps[i] = value;
+            if (constantReps) {
+              for (int i = 0; i < reps.length; ++i) {
+                reps[i] = value;
               }
             } else {
-              widget.reps[index] = value;
+              reps[index] = value;
             }
           });
         },
@@ -325,7 +325,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         padding: EdgeInsets.all(8),
       ),
     ];
-    for (int i = 0; i < (widget.sets ?? 1); ++i) {
+    for (int i = 0; i < (sets ?? 1); ++i) {
       widgets.add(repsTextField(context, i));
     }
     return Column(
@@ -335,7 +335,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
 
   @override
   Widget build(BuildContext context) {
-    print('sets: ${widget.sets} reps: ${widget.reps}');
+    print('sets: $sets reps: $reps');
 
     return GestureDetector(
       child: Card(
@@ -358,7 +358,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
                     color: Theme.of(context).accentColor,
                   ),
                 ),
-                widget.constantReps
+                constantReps
                     ? constantSetsVariantSubWidgets(context)
                     : nonConstantSetsVariantSubWidgets(context),
               ],
@@ -367,9 +367,9 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         ),
       ),
       onDoubleTap: () {
-        widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
+        reps = List.filled(sets ?? 1, reps[0]);
         setState(() {
-          widget.constantReps = !widget.constantReps;
+          constantReps = !constantReps;
         });
       },
     );
@@ -377,7 +377,7 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
 }
 
 class IsometricConfigurator extends StatefulWidget {
-  Exercise exercise;
+  final Exercise exercise;
   IsometricConfigurator(this.exercise);
   @override
   _IsometricConfiguratorState createState() => _IsometricConfiguratorState();
