@@ -130,7 +130,7 @@ class RepsOrIsometricButtons extends StatelessWidget {
       ),
       onPressed: selected ? null : () => onPressed(),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0.0),
+        borderRadius: BorderRadius.circular(20),
         side: BorderSide(color: Theme.of(context).accentColor),
       ),
     );
