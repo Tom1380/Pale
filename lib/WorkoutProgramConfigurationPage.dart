@@ -262,9 +262,12 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         decoration: new InputDecoration(labelText: "Sets"),
         keyboardType: TextInputType.number,
         onChanged: (input) {
+          int value = int.parse(input);
+          if (value < 1) {
+            return;
+          }
           setState(() {
-            int value = int.parse(input);
-            widget.sets = value > 0 ? value : 1;
+            widget.sets = value;
           });
           if (widget.reps.length != widget.sets) {
             widget.reps = List.filled(widget.sets ?? 1, widget.reps[0]);
@@ -286,6 +289,9 @@ class _RepsConfiguratorState extends State<RepsConfigurator> {
         onChanged: (input) {
           setState(() {
             int value = int.parse(input);
+            if (value < 1) {
+              return;
+            }
             if (widget.constantReps) {
               for (int i = 0; i < widget.reps.length; ++i) {
                 widget.reps[i] = value;
