@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,29 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Cronometro',
+      ),
+      body: Center(
+        child: TimerWidget(),
+      ),
+    );
+  }
+}
+
+class TimerWidget extends StatefulWidget {
+  @override
+  _TimerWidgetState createState() => _TimerWidgetState();
+}
+
+class _TimerWidgetState extends State<TimerWidget> {
   AudioPlayer audioPlayer = AudioPlayer();
   AudioCache ac = AudioCache();
+
+  bool started = false;
 
   @override
   void initState() {
@@ -29,22 +52,80 @@ class _TimerPageState extends State<TimerPage> {
   @override
   Widget build(BuildContext context) {
     int pressed_times = 0;
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Cronometro',
-      ),
-      body: Center(
-        child: IconButton(
-          iconSize: 70,
-          icon: Icon(Icons.timer),
-          color: Theme.of(context).accentColor,
-          onPressed: () async {
-            int i = (pressed_times % 3) + 1;
-            ac.play('$i.wav');
-            pressed_times++;
-          },
-        ),
+
+    if (started) {
+      return Row(
+        children: [
+          Expanded(
+            child: Container(),
+          ),
+          MinutesAndSeconds(),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [iconButton()],
+            ),
+          ),
+        ],
+      );
+    } else {
+      return iconButton();
+    }
+  }
+
+  Widget iconButton() {
+    return Hero(
+      tag: 'timer icon',
+      child: IconButton(
+        iconSize: 70,
+        icon: Icon(Icons.timer),
+        color: Theme.of(context).accentColor,
+        onPressed: () async {
+          ac.play('1.wav');
+          setState(() {
+            started = !started;
+          });
+        },
       ),
     );
+  }
+}
+
+class MinutesAndSeconds extends StatefulWidget {
+  @override
+  _MinutesAndSecondsState createState() => _MinutesAndSecondsState();
+}
+
+class _MinutesAndSecondsState extends State<MinutesAndSeconds> {
+  Timer timer;
+  int secondsSinceStart = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(
+        Duration(seconds: 1), (Timer t) => setState(() => secondsSinceStart++));
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      formattedTime(),
+      style: TextStyle(fontSize: 50),
+    );
+  }
+
+  String formattedTime() {
+    int seconds = secondsSinceStart % 60;
+    int minutes = (secondsSinceStart / 60).floor();
+    String minutesString = minutes < 10 ? '0$minutes' : '$minutes';
+    String secondsString = seconds < 10 ? '0$seconds' : '$seconds';
+    return '$minutesString:$secondsString';
   }
 }
