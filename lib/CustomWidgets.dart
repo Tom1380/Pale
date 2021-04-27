@@ -34,6 +34,7 @@ class CustomBottomNavigationBar extends PreferredSize {
             items: items,
             currentIndex: currentIndex,
             onTap: onTap,
+            type: BottomNavigationBarType.fixed,
           ),
         );
 }

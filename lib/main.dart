@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'CustomWidgets.dart';
 import 'ExercisesPage/ExercisesPage.dart';
+import 'TimerPage.dart';
 import 'WorkoutProgramConfigurationPage.dart';
 import 'WorkoutSessionLogPage.dart';
 
@@ -15,13 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Palestra',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        accentColor: Colors.red[600],
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        accentColor: Colors.blue[600],
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(color: Colors.red[900]),
+        appBarTheme: AppBarTheme(color: Colors.blue[900]),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.blue[900],
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white70,
         ),
@@ -49,6 +51,9 @@ class Page extends StatefulWidget {
     ExercisesPage(
       key: PageStorageKey('Page3'),
       isPicker: false,
+    ),
+    TimerPage(
+      key: PageStorageKey('Page4'),
     ),
   ];
 
@@ -87,6 +92,10 @@ class _PageState extends State<Page> {
               Icons.directions_run,
             ),
             label: 'Esercizi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timer),
+            label: 'Cronometro',
           ),
         ],
         currentIndex: _index,

@@ -116,6 +116,7 @@ class WorkoutSessionPreviewHighlightsText extends StatelessWidget {
       style: TextStyle(
         color: Colors.blueGrey[600],
         fontStyle: italic ? FontStyle.italic : FontStyle.normal,
+        fontWeight: italic ? FontWeight.bold : FontWeight.normal,
       ),
     );
   }
