@@ -27,6 +27,7 @@ dependencies:
   path:
   flappy_search_bar:
   audioplayers: ^0.18.3
+  wakelock: ^0.5.1
 
 
 

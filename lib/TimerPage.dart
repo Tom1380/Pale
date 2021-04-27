@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'CustomWidgets.dart';
 
@@ -104,13 +105,17 @@ class _MinutesAndSecondsState extends State<MinutesAndSeconds> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-        Duration(seconds: 1), (Timer t) => setState(() => secondsSinceStart++));
+      Duration(seconds: 1),
+      (Timer t) => setState(() => secondsSinceStart++),
+    );
+    Wakelock.enable();
   }
 
   @override
   void dispose() {
     timer?.cancel();
     super.dispose();
+    Wakelock.disable();
   }
 
   @override
