@@ -7,6 +7,8 @@ import 'package:wakelock/wakelock.dart';
 
 import 'CustomWidgets.dart';
 
+// TODO find a way to leave the timer on when you switch to another tab of the app.
+
 class TimerPage extends StatefulWidget {
   TimerPage({Key key}) : super(key: key);
   @override
@@ -52,8 +54,6 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int pressed_times = 0;
-
     if (started) {
       return Row(
         children: [
@@ -75,6 +75,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   Widget iconButton() {
+    // TODO Hero only works with different pages, either find a way to do it on the same page or remove it.
     return Hero(
       tag: 'timer icon',
       child: IconButton(
