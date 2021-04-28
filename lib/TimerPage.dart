@@ -47,8 +47,8 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   void cacheAudios() async {
-    for (int i = 1; i <= 3; i++) {
-      await ac.load('$i.wav');
+    for (int i = 0; i < 10; i++) {
+      await ac.load('$i.mp3');
     }
   }
 
@@ -60,7 +60,7 @@ class _TimerWidgetState extends State<TimerWidget> {
           Expanded(
             child: Container(),
           ),
-          MinutesAndSeconds(),
+          MinutesAndSeconds(ac),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -83,7 +83,6 @@ class _TimerWidgetState extends State<TimerWidget> {
         icon: Icon(Icons.timer),
         color: Theme.of(context).accentColor,
         onPressed: () async {
-          ac.play('1.wav');
           setState(() {
             started = !started;
           });
@@ -94,6 +93,10 @@ class _TimerWidgetState extends State<TimerWidget> {
 }
 
 class MinutesAndSeconds extends StatefulWidget {
+  AudioCache ac;
+
+  MinutesAndSeconds(this.ac);
+
   @override
   _MinutesAndSecondsState createState() => _MinutesAndSecondsState();
 }
@@ -107,7 +110,10 @@ class _MinutesAndSecondsState extends State<MinutesAndSeconds> {
     super.initState();
     timer = Timer.periodic(
       Duration(seconds: 1),
-      (Timer t) => setState(() => secondsSinceStart++),
+      (Timer t) {
+        setState(() => secondsSinceStart++);
+        widget.ac.play("${(secondsSinceStart % 10)}.mp3");
+      },
     );
     Wakelock.enable();
   }
@@ -115,8 +121,8 @@ class _MinutesAndSecondsState extends State<MinutesAndSeconds> {
   @override
   void dispose() {
     timer?.cancel();
-    super.dispose();
     Wakelock.disable();
+    super.dispose();
   }
 
   @override
