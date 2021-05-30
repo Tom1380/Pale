@@ -21,7 +21,15 @@ fn exercises(query: String) -> Json<Vec<String>> {
 fn exercises_search(query: String) -> Vec<String> {
     let query = query.to_lowercase();
     let matcher = SkimMatcherV2::default();
-    let all = vec!["Bench Press", "Archer Chin-ups", "Squat"];
+    let all = vec![
+        "Bench Press",
+        "Archer Chin-up",
+        "Squat",
+        "Dumbbell Curl",
+        "Overhead Press",
+        "Hip Thrust",
+        "Trap Bar Deadlift"
+    ];
 
     let mut v: Vec<_> = all
         .into_iter()
