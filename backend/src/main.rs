@@ -19,6 +19,7 @@ fn exercises(query: String) -> Json<Vec<String>> {
 
 // Get all exercises that match fuzzily with the query, sort them by similarity to the query.
 fn exercises_search(query: String) -> Vec<String> {
+    let query = query.to_lowercase();
     let matcher = SkimMatcherV2::default();
     let all = vec!["Bench Press", "Archer Chin-ups", "Squat"];
 
