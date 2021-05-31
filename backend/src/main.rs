@@ -28,17 +28,19 @@ fn exercises_search(query: String) -> Vec<String> {
         "Dumbbell Curl",
         "Overhead Press",
         "Hip Thrust",
-        "Trap Bar Deadlift"
+        "Trap Bar Deadlift",
+        "Pendlay Row"
     ];
 
     let mut v: Vec<_> = all
         .into_iter()
-        .map(|exercise| (exercise.to_string(), matcher.fuzzy_match(exercise, &query)))
+        .map(|exercise| (exercise, matcher.fuzzy_match(exercise, &query)))
         .filter(|(_exercise, match_rating)| match_rating.is_some())
         .collect();
     v.sort_by(|(_, rating1), (_, rating2)| rating1.cmp(rating2));
     v.reverse();
     v.into_iter()
-        .map(|(exercise, _match_rating)| exercise)
+        .map(|(exercise, _match_rating)| exercise.to_string())
+        .take(20)
         .collect()
 }
