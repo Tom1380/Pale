@@ -1,7 +1,9 @@
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
+import 'package:http/http.dart' as http;
 
 import '../CustomWidgets.dart';
 import '../db.dart';
@@ -22,18 +24,27 @@ class ExercisesPage extends StatefulWidget {
 class _ExercisesPageState extends State<ExercisesPage> {
   Future<List<Exercise>> search(String search) async {
     final Database db = await widget.futureDB;
-    List<Map<String, dynamic>> maps = await db.query(
-      'exercises',
-      columns: ['id', 'name', 'type'],
-      where: 'name LIKE ?',
-      whereArgs: ['%$search%'],
-      limit: 30,
+    // List<Map<String, dynamic>> maps = await db.query(
+    //   'exercises',
+    //   columns: ['id', 'name', 'type'],
+    //   where: 'name LIKE ?',
+    //   whereArgs: ['%$search%'],
+    //   limit: 30,
+    // );
+    http.Response response = await http.get(
+      Uri.parse(
+        'http://192.168.40.42:8000/exercises/$search',
+      ),
+    );
+    List<dynamic> maps = jsonDecode(
+      response.body,
     );
     return List.generate(maps.length, (i) {
+      // TODO use actual ID and actual Type (I should probably change it from int to something else).
       return Exercise(
-        id: maps[i]['id'],
-        name: maps[i]['name'],
-        type: maps[i]['type'],
+        id: 1,
+        name: maps[i]['exercise'],
+        type: 1,
       );
     });
   }
