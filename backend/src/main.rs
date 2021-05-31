@@ -9,7 +9,14 @@ use rocket_contrib::json::Json;
 use serde::Serialize;
 
 fn main() {
-    rocket::ignite().mount("/", routes![exercises]).launch();
+    rocket::ignite()
+        .mount("/", routes![exercises, all_exercises])
+        .launch();
+}
+
+#[get("/exercises")]
+fn all_exercises() -> Json<Vec<ExerciseSearchFuzzyMatch>> {
+    Json(exercises_search("".to_string()))
 }
 
 #[get("/exercises/<query>")]
@@ -21,7 +28,7 @@ fn exercises(query: String) -> Json<Vec<ExerciseSearchFuzzyMatch>> {
 fn exercises_search(query: String) -> Vec<ExerciseSearchFuzzyMatch> {
     let query = query.to_lowercase();
     let matcher = SkimMatcherV2::default();
-    let all = vec![
+    let exercises = vec![
         "Bench Press",
         "Archer Chin-up",
         "Squat",
@@ -32,7 +39,7 @@ fn exercises_search(query: String) -> Vec<ExerciseSearchFuzzyMatch> {
         "Pendlay Row",
     ];
 
-    let mut v: Vec<_> = all
+    let mut v: Vec<_> = exercises
         .into_iter()
         .map(|exercise| (exercise, matcher.fuzzy_indices(exercise, &query)))
         .filter(|(_exercise, match_results)| match_results.is_some())
