@@ -37,6 +37,7 @@ fn exercises_search(query: String) -> Vec<ExerciseSearchFuzzyMatch> {
         "Hip Thrust",
         "Trap Bar Deadlift",
         "Pendlay Row",
+        "Ring Archer Pushups",
     ];
 
     let mut v: Vec<_> = exercises
