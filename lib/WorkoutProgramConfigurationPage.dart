@@ -146,19 +146,6 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
           this.exerciseList,
         ),
       );
-    } else if (this.exerciseList.length <= 8) {
-      rowChildren.add(
-        rowChild(
-          context,
-          this.exerciseList.sublist(0, 4),
-        ),
-      );
-      rowChildren.add(
-        rowChild(
-          context,
-          this.exerciseList.sublist(4, this.exerciseList.length),
-        ),
-      );
     } else {
       int middle = (this.exerciseList.length / 2).round();
       rowChildren.add(
@@ -174,6 +161,7 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
         ),
       );
     }
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: rowChildren,
