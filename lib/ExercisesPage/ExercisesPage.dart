@@ -114,6 +114,8 @@ class _ExercisesPageState extends State<ExercisesPage> {
   }
 }
 
+enum ExerciseType { isometric, repetitions }
+
 class Exercise {
   final int id;
   final String name;
