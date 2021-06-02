@@ -54,24 +54,22 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (started) {
-      return Row(
-        children: [
-          Expanded(
-            child: Container(),
-          ),
-          MinutesAndSeconds(ac),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [iconButton()],
-            ),
-          ),
-        ],
-      );
-    } else {
-      return iconButton();
-    }
+    return started
+        ? Row(
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              MinutesAndSeconds(ac),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [iconButton()],
+                ),
+              ),
+            ],
+          )
+        : iconButton();
   }
 
   Widget iconButton() {
