@@ -56,17 +56,10 @@ class _TimerWidgetState extends State<TimerWidget> {
   Widget build(BuildContext context) {
     return started
         ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: Container(),
-              ),
               MinutesAndSeconds(ac),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [iconButton()],
-                ),
-              ),
+              iconButton(),
             ],
           )
         : iconButton();
@@ -74,18 +67,16 @@ class _TimerWidgetState extends State<TimerWidget> {
 
   Widget iconButton() {
     // TODO Hero only works with different pages, either find a way to do it on the same page or remove it.
-    return Hero(
-      tag: 'timer icon',
-      child: IconButton(
-        iconSize: 70,
-        icon: Icon(Icons.timer),
-        color: Theme.of(context).accentColor,
-        onPressed: () {
-          setState(() {
-            started = !started;
-          });
-        },
-      ),
+    return IconButton(
+      padding: const EdgeInsets.all(0.0),
+      iconSize: 70,
+      icon: Icon(Icons.timer),
+      color: Theme.of(context).accentColor,
+      onPressed: () {
+        setState(() {
+          started = !started;
+        });
+      },
     );
   }
 }
