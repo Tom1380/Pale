@@ -121,6 +121,7 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
       padding: EdgeInsets.only(
         left: 16,
       ),
+      // Vertical divider
       decoration: BoxDecoration(
         border: Border(
           left: BorderSide(
@@ -139,7 +140,9 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> rowChildren = [];
+
     if (this.exerciseList.length <= 4) {
+      // Single column exercise list
       rowChildren.add(
         rowChild(
           context,
@@ -148,6 +151,7 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
       );
     } else {
       int middle = (this.exerciseList.length / 2).round();
+      // Double column exercise list
       rowChildren.add(
         rowChild(
           context,
@@ -169,6 +173,7 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
   }
 }
 
+// used when one of WorkoutProgramDayExerciseList is clicked
 class WorkoutProgramDayConfigurator extends StatefulWidget {
   @override
   _WorkoutProgramDayConfiguratorState createState() =>
