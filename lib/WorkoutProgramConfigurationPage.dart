@@ -100,18 +100,20 @@ class WorkoutProgramDayExerciseList extends StatelessWidget {
   WorkoutProgramDayExerciseList(this.exerciseList);
   Widget rowChild(BuildContext context, List<String> strings) {
     List<Text> texts = [];
-    for (int i = 0; i < strings.length; ++i) {
-      texts.add(
+
+    strings.forEach(
+      (e) => texts.add(
         Text(
-          strings[i],
+          e,
           overflow: TextOverflow.fade,
           style: TextStyle(
             fontSize: 10,
             color: Colors.blueGrey[600],
           ),
         ),
-      );
-    }
+      ),
+    );
+
     return Container(
       margin: EdgeInsets.only(
         left: 16,
