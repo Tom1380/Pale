@@ -2,15 +2,11 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:sqflite/sqflite.dart';
 import 'package:http/http.dart' as http;
-
 import '../CustomWidgets.dart';
-import '../db.dart';
 import 'NewExercisePage.dart';
 
 class ExercisesPage extends StatefulWidget {
-  final Future<Database> futureDB = dbConnection();
   // Is this used as an exercise picker?
   final bool isPicker;
   ExercisesPage({
@@ -23,7 +19,6 @@ class ExercisesPage extends StatefulWidget {
 
 class _ExercisesPageState extends State<ExercisesPage> {
   Future<List<Exercise>> search(String search) async {
-    final Database db = await widget.futureDB;
     // List<Map<String, dynamic>> maps = await db.query(
     //   'exercises',
     //   columns: ['id', 'name', 'type'],
@@ -109,7 +104,6 @@ class _ExercisesPageState extends State<ExercisesPage> {
             context,
             MaterialPageRoute(
               builder: (context) => NewExercisePage(
-                widget.futureDB,
                 isPicker: widget.isPicker,
               ),
             ),

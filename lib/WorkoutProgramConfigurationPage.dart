@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'CustomWidgets.dart';
 import 'ExercisesPage/ExercisesPage.dart';
-import 'db.dart';
 
 class WorkoutProgramConfiguration extends StatefulWidget {
-  final Future<Database> futureDB = dbConnection();
   WorkoutProgramConfiguration({Key key}) : super(key: key);
   @override
   _WorkoutProgramConfigurationState createState() =>

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-
 import '../CustomWidgets.dart';
 import 'ExercisesPage.dart';
 
 class NewExercisePage extends StatefulWidget {
-  final Future<Database> futureDB;
   final bool isPicker;
-  NewExercisePage(
-    this.futureDB, {
+  NewExercisePage({
     @required this.isPicker,
   });
   @override
@@ -59,21 +55,13 @@ class _NewExercisePageState extends State<NewExercisePage> {
       columnChildren.add(
         FloatingActionButton.extended(
           onPressed: () async {
-            final Database db = await widget.futureDB;
-            int id = await db.insert(
-              'exercises',
-              Exercise(
-                name: myController.text,
-                type: repsOrIsometricChoice,
-              ).toMap(),
-              conflictAlgorithm: ConflictAlgorithm.fail,
-            );
             Navigator.pop(context);
             if (widget.isPicker) {
               Navigator.pop(
                 context,
                 Exercise(
-                  id: id,
+                  // TODO temporarily setted id to 0, becouse we removed sqflite database, implement API
+                  id: 0,
                   name: myController.text,
                   type: repsOrIsometricChoice,
                 ),

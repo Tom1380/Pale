@@ -23,7 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sqflite:
   path:
   flappy_search_bar:
   audioplayers: ^0.18.3
