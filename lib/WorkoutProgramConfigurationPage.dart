@@ -201,7 +201,7 @@ class _WorkoutProgramDayConfiguratorState
               if (exercise != null) {
                 setState(
                   () => exercises.add(
-                    exercise.type == 0
+                    exercise.type == ExerciseType.repetitions
                         ? RepsConfigurator(exercise)
                         : IsometricConfigurator(exercise),
                   ),
@@ -219,9 +219,6 @@ class _WorkoutProgramDayConfiguratorState
   @override
   Widget build(BuildContext context) {
     List<Widget> lvChildren = new List.from(exercises);
-    lvChildren.add(
-      exerciseButton(),
-    );
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Giorno A',
@@ -229,7 +226,10 @@ class _WorkoutProgramDayConfiguratorState
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: ListView(
-          children: lvChildren,
+          children: lvChildren
+            ..add(
+              exerciseButton(),
+            ),
         ),
       ),
     );

@@ -28,7 +28,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
     // );
     http.Response response = await http.get(
       Uri.parse(
-        'http://192.168.40.42:8000/exercises/$search',
+        'http://192.168.1.8:8000/exercises/$search',
       ),
     );
     List<dynamic> maps = jsonDecode(
@@ -39,7 +39,7 @@ class _ExercisesPageState extends State<ExercisesPage> {
       return Exercise(
         id: 1,
         name: maps[i]['exercise'],
-        type: 1,
+        type: ExerciseType.isometric,
       );
     });
   }
@@ -119,7 +119,7 @@ enum ExerciseType { isometric, repetitions }
 class Exercise {
   final int id;
   final String name;
-  final int type;
+  final ExerciseType type;
 
   Exercise({this.id, this.name, this.type});
 
