@@ -80,7 +80,7 @@ class _TimerWidgetState extends State<TimerWidget> {
         iconSize: 70,
         icon: Icon(Icons.timer),
         color: Theme.of(context).accentColor,
-        onPressed: () async {
+        onPressed: () {
           setState(() {
             started = !started;
           });
@@ -110,7 +110,10 @@ class _MinutesAndSecondsState extends State<MinutesAndSeconds> {
       Duration(seconds: 1),
       (Timer t) {
         setState(() => secondsSinceStart++);
-        widget.ac.play("${(secondsSinceStart % 10)}.mp3");
+        widget.ac.play(
+          "${(secondsSinceStart % 10)}.mp3",
+          mode: PlayerMode.LOW_LATENCY,
+        );
       },
     );
     Wakelock.enable();
