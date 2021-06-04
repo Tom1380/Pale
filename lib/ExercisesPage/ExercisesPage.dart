@@ -35,7 +35,6 @@ class _ExercisesPageState extends State<ExercisesPage> {
       response.body,
     );
     return List.generate(maps.length, (i) {
-      // TODO use actual ID and actual Type (I should probably change it from int to something else).
       return Exercise(
         id: 1,
         name: maps[i]['exercise'],
