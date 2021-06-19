@@ -16,6 +16,7 @@ CREATE TABLE training_programs (
 );
 
 CREATE TABLE training_programs_exercises (
+	id SERIAL,
 	training_program_id INTEGER NOT NULL REFERENCES training_programs (id),
 	-- Could be 'A', or maybe 'Push', or even 'Back day'.
 	day_name TEXT NOT NULL,
@@ -26,5 +27,5 @@ CREATE TABLE training_programs_exercises (
 	seconds INTEGER,
 	-- If 0, MAX
 	notes TEXT,
-	PRIMARY KEY (training_program_id, day_name)
+	PRIMARY KEY (id)
 );
