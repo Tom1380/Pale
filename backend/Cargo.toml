@@ -10,3 +10,5 @@ rocket_contrib = "*"
 serde = { version = "*", features = ["derive"] }
 serde_json = "*"
 fuzzy-matcher = "*"
+postgres = "*"
+postgres-types = { version = "*", features = ["derive"] }
