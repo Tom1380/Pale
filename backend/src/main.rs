@@ -2,15 +2,21 @@
 
 #[macro_use]
 extern crate rocket;
-extern crate serde;
+
 use fuzzy_matcher::skim::SkimMatcherV2;
 use fuzzy_matcher::FuzzyMatcher;
 use rocket_contrib::json::Json;
 use serde::Serialize;
 
+mod db;
+mod exercises;
+
 fn main() {
     rocket::ignite()
-        .mount("/", routes![exercises, all_exercises])
+        .mount(
+            "/",
+            routes![exercises, all_exercises, exercises::add_exercise],
+        )
         .launch();
 }
 
