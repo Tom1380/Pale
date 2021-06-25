@@ -10,12 +10,18 @@ use serde::Serialize;
 
 mod db;
 mod exercises;
+mod training_programs;
 
 fn main() {
     rocket::ignite()
         .mount(
             "/",
-            routes![exercises, all_exercises, exercises::add_exercise],
+            routes![
+                exercises,
+                all_exercises,
+                exercises::add_exercise,
+                training_programs::new_training_program
+            ],
         )
         .launch();
 }

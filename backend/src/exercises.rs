@@ -3,7 +3,7 @@ use postgres_types::{FromSql, ToSql};
 
 #[derive(Debug, ToSql, FromSql)]
 #[postgres(name = "exercise_type")]
-enum ExerciseType {
+pub enum ExerciseType {
 	#[postgres(name = "reps")]
 	Reps,
 	#[postgres(name = "isometric")]
