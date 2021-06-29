@@ -9,6 +9,7 @@ use rocket_contrib::json::Json;
 use serde::Serialize;
 
 mod db;
+mod error;
 mod exercises;
 mod training_programs;
 
@@ -20,7 +21,8 @@ fn main() {
                 exercises,
                 all_exercises,
                 exercises::add_exercise,
-                training_programs::new_training_program
+                training_programs::new_training_program,
+                training_programs::new_training_program_day
             ],
         )
         .launch();
