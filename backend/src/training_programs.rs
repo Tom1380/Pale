@@ -24,13 +24,21 @@ pub fn new_training_program(name: String) -> Json<ReturnedId> {
 
 // TODO implement notes as request guard.
 #[post("/training_program/<id>/days/new/<name>")]
-pub fn new_training_program_day(id: i32, name: String) {
+pub fn new_training_program_day(id: i32, name: String) -> Json<ReturnedId> {
     let mut conn = new_conn().unwrap();
-    conn.execute(
-        "INSERT INTO training_programs_days (training_program_id, name) VALUES ($1, $2)",
-        &[&id, &name],
-    )
-    .unwrap();
+
+    Json(ReturnedId {
+        id: conn
+            .query(
+                // TODO support notes.
+                 "INSERT INTO training_programs_days (training_program_id, name) VALUES ($1, $2) RETURNING id",
+                  &[&id, &name],
+            )
+            .unwrap()
+            .get(0)
+            .unwrap()
+            .get(0),
+    })
 }
 
 #[post("/training_program_days/<day_id>/add_exercise/<exercise_id>")]
