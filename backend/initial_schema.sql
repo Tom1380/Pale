@@ -28,7 +28,7 @@ CREATE TABLE training_programs_days_exercises (
 	training_program_day_id INTEGER NOT NULL REFERENCES training_programs_days (id),
 	-- Could be 'A', or maybe 'Push', or even 'Back day'.
 	exercise_id INTEGER NOT NULL REFERENCES exercises (id),
-	sets INTEGER,
+	sets INTEGER NOT NULL,
 	reps INTEGER,
 	-- If 0, MAX
 	seconds INTEGER,
