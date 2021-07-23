@@ -19,6 +19,7 @@ CREATE TABLE training_programs_days (
 	id SERIAL,
 	training_program_id INTEGER NOT NULL REFERENCES training_programs (id),
 	name TEXT NOT NULL UNIQUE,
+	notes TEXT,
 	PRIMARY KEY (id)
 );
 
