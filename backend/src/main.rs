@@ -11,6 +11,7 @@ use serde::Serialize;
 mod db;
 mod error;
 mod exercises;
+mod helpers;
 mod training_programs;
 
 fn main() {

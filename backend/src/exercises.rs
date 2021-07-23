@@ -1,4 +1,5 @@
 use crate::db::new_conn;
+use crate::helpers::ReturnedId;
 use postgres_types::{FromSql, ToSql};
 use rocket_contrib::json::Json;
 use serde::Serialize;
@@ -41,9 +42,4 @@ pub fn add_exercise(name: String, exercise_type: String) -> Json<ReturnedId> {
             .unwrap()
             .get(0),
     })
-}
-
-#[derive(Serialize)]
-pub struct ReturnedId {
-    id: i32,
 }

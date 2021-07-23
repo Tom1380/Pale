@@ -1,13 +1,25 @@
 use crate::db::new_conn;
+use crate::helpers::ReturnedId;
 use rocket_contrib::json::Json;
 use serde::Serialize;
 
 // TODO implement notes as request guard.
 #[post("/training_program/new/<name>")]
-pub fn new_training_program(name: String) {
+pub fn new_training_program(name: String) -> Json<ReturnedId> {
     let mut conn = new_conn().unwrap();
-    conn.execute("INSERT INTO training_programs (name) VALUES ($1)", &[&name])
-        .unwrap();
+
+    Json(ReturnedId {
+        id: conn
+            .query(
+                // TODO support notes.
+                "INSERT INTO training_programs (name) VALUES ($1) RETURNING id",
+                &[&name],
+            )
+            .unwrap()
+            .get(0)
+            .unwrap()
+            .get(0),
+    })
 }
 
 // TODO implement notes as request guard.
