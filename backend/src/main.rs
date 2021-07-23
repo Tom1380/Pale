@@ -23,7 +23,8 @@ fn main() {
                 exercises::add_exercise,
                 training_programs::new_training_program,
                 training_programs::new_training_program_day,
-                training_programs::add_exercise_to_training_program
+                training_programs::add_exercise_to_training_program,
+                training_programs::get_training_program_day
             ],
         )
         .launch();

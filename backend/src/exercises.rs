@@ -3,7 +3,15 @@ use postgres_types::{FromSql, ToSql};
 use rocket_contrib::json::Json;
 use serde::Serialize;
 
-#[derive(Debug, ToSql, FromSql)]
+#[derive(Serialize)]
+pub struct Exercise {
+    id: i32,
+    name: String,
+    exercise_type: ExerciseType,
+    notes: String,
+}
+
+#[derive(Debug, ToSql, FromSql, Serialize)]
 #[postgres(name = "exercise_type")]
 pub enum ExerciseType {
     #[postgres(name = "reps")]
@@ -24,6 +32,7 @@ pub fn add_exercise(name: String, exercise_type: String) -> Json<ReturnedId> {
     Json(ReturnedId {
         id: conn
             .query(
+                // TODO support notes.
                 "INSERT INTO exercises (name, type) VALUES ($1, $2) RETURNING id",
                 &[&name, &exercise_type],
             )
