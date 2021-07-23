@@ -42,12 +42,22 @@ pub fn new_training_program_day(id: i32, name: String) -> Json<ReturnedId> {
 }
 
 #[post("/training_program_days/<day_id>/add_exercise/<exercise_id>")]
-pub fn add_exercise_to_training_program(day_id: i32, exercise_id: i32) {
+pub fn add_exercise_to_training_program(day_id: i32, exercise_id: i32) -> Json<ReturnedId> {
     let mut conn = new_conn().unwrap();
-    conn.execute(
-        // TODO get sets, reps, time from headers.
-        "INSERT INTO training_programs_days_exercises (training_program_day_id, exercise_id, sets, reps) VALUES ($1, $2, 3, 8)",
-        &[&day_id, &exercise_id]).unwrap();
+
+    Json(ReturnedId {
+        id: conn
+            .query(
+                // TODO support notes.
+                         "INSERT INTO training_programs_days_exercises (training_program_day_id, exercise_id, sets, reps) VALUES ($1, $2, 3, 8) RETURNING id",
+
+                 &[&day_id, &exercise_id],
+            )
+            .unwrap()
+            .get(0)
+            .unwrap()
+            .get(0),
+    })
 }
 
 #[get("/training_program_days/<day_id>")]
